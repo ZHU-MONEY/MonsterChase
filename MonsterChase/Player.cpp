@@ -6,7 +6,7 @@ Player::Player()
 	setName(as);
 }
 
-Player::Player(const Vector2D& pos, const char* name)
+Player::Player(const Vector2D& pos, char* name)
 {
 	setName(name);
 	setPosition(pos);
@@ -14,6 +14,8 @@ Player::Player(const Vector2D& pos, const char* name)
 
 Player::~Player()
 {
+	free(name_);
+	name_ = NULL;
 }
 
 void Player::move(direction dir)
@@ -52,7 +54,8 @@ const char* Player::getName()
 	return name_;
 }
 
-void Player::setName(const char* name)
+void Player::setName(char* name)
 {
-	strcpy_s(name_, name);
+	name_ = name;
+	//strcpy_s(name_, name);
 }

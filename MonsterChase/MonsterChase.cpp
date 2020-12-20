@@ -4,6 +4,7 @@
 
 MonsterChase::MonsterChase()
 {
+
 	askForMaxMonsterAmount();
 	askForStartingMonsterAmount();
 	currentMonsterAmount_ = 0;
@@ -91,7 +92,7 @@ void MonsterChase::askForMonsterName()
 		if (strlen(monsterNameBuffer) ==0)
 		{
 			std::cout << "Monster's name is set to: --- defMon ---" << std::endl;
-			createMonster("defMon");
+			//createMonster("defMon");
 		}
 		//otherwise use user input name
 		else {
@@ -105,6 +106,7 @@ void MonsterChase::askForMonsterName()
 			std::cout << "Monster's name is set to: --- " << monsterName << " ---" << std::endl;
 			createMonster(monsterName);
 		}
+		
 	}
 	//fill the remainning array elements that are not pointed to Monster to NULL
 	for (int i = currentMonsterAmount_; i < maxMonsterAmount_;i++) {
@@ -141,14 +143,14 @@ void MonsterChase::askForCommand()
 	}
 }
 
-void MonsterChase::createMonster(const char* name)
+void MonsterChase::createMonster(char* name)
 {
 	Vector2D initialMonsterPos = createRandomLocation();
 	monsters_[currentMonsterAmount_] = new Monster(initialMonsterPos, name, MAX_MONSTER_TIME_TO_LIVE);
 	currentMonsterAmount_++;
 }
 
-void MonsterChase::createMonsterAtIndex(const char* name, int& i)
+void MonsterChase::createMonsterAtIndex(char* name, int& i)
 {
 	Vector2D initialMonsterPos = createRandomLocation();
 	monsters_[i] = new Monster(initialMonsterPos, name, MAX_MONSTER_TIME_TO_LIVE);
@@ -157,15 +159,21 @@ void MonsterChase::createMonsterAtIndex(const char* name, int& i)
 
 void MonsterChase::askForPlayerName()
 {
-	char playerName[MAX_INPUT_SIZE + 1];
+	char playerNameBuffer[MAX_INPUT_SIZE + 1];
 	std::cout << "enter player name" << std::endl;
+	std::cin.getline(playerNameBuffer, MAX_INPUT_SIZE + 1);
 
-	std::cin.getline(playerName, MAX_INPUT_SIZE + 1);
+	char* playerName = (char*)malloc(strlen(playerNameBuffer));
+
+	for (int i = 0; i < strlen(playerNameBuffer) + 1;i++) {
+		playerName[i] = playerNameBuffer[i];
+	}
+
 	std::cout << "player name is: *** " << playerName << " ***" << std::endl;
 	createPlayer(playerName);
 }
 
-void MonsterChase::createPlayer(const char* name)
+void MonsterChase::createPlayer(char* name)
 {
 	//player always start at the middle, this is hard coded
 	Vector2D initialPlayerPos = Vector2D(25.0f, 25.0f);
@@ -236,7 +244,9 @@ void MonsterChase::update()
 		if (randomNum < 2) {
 			for (int i = 0; i < maxMonsterAmount_;i++) {
 				if (monsters_[i] == NULL) {
-					createMonsterAtIndex(DEFAULT_MONSTER_NAME, i);
+					//char defaultMonsterName[] = "default";
+					//char* ptr = defaultMonsterName;
+					createMonsterAtIndex(ptr, i);
 					break;
 				}
 			}

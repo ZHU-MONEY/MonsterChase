@@ -36,15 +36,17 @@ public:
 	void askForMaxMonsterAmount();
 	void askForMonsterName();
 	void askForCommand();
-	void createMonster(const char* name);
-	void createMonsterAtIndex(const char* name, int& i);
+	void createMonster(char* name);
+	void createMonsterAtIndex(char* name, int& i);
 	void askForPlayerName();
-	void createPlayer(const char* name);
+	void createPlayer(char* name);
 	Vector2D createRandomLocation();
 	void printGameData();
 	bool getGameStatus();
 	void revertGameStatus();
 	void update();
+	char defaultMonsterName[8] = "default";
+	char* ptr = defaultMonsterName;
 
 };
 

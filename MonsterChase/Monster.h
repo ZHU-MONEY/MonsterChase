@@ -4,7 +4,7 @@ class Monster : public Player
 {
 public:
 	Monster();
-	Monster(const Vector2D& pos, const char* name, const int time);
+	Monster(const Vector2D& pos, char* name, const int time);
 	~Monster();
 	void move(Player& targetPlayer);
 	void setTimeToLive(int time);

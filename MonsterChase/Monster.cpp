@@ -3,9 +3,10 @@
 
 Monster::Monster()
 {
+
 }
 
-Monster::Monster(const Vector2D& pos, const char* name, const int time)
+Monster::Monster(const Vector2D& pos, char* name, const int time)
 {
 	setName(name);
 	setPosition(pos);
@@ -14,6 +15,8 @@ Monster::Monster(const Vector2D& pos, const char* name, const int time)
 
 Monster::~Monster()
 {
+	free(name_);
+	name_ = NULL;
 }
 
 void Monster::move(Player& targetPlayer)
