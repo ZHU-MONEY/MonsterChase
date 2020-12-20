@@ -11,6 +11,24 @@ MonsterChase::MonsterChase()
 	askForPlayerName();
 }
 
+MonsterChase::~MonsterChase()
+{
+	delete player_;
+	player_ = NULL;
+
+	for (int i = 0; i < maxMonsterAmount_; ++i)
+	{
+		if (monsters_[i] != NULL)
+		{
+			delete monsters_[i];
+			monsters_[i] = NULL;
+		}
+	}
+
+	delete monsters_;
+	monsters_ = NULL;
+}
+
 void MonsterChase::askForStartingMonsterAmount()
 {
 	std::cout << "Enter starting Monster amount: " << std::endl;
@@ -228,9 +246,12 @@ void MonsterChase::update()
 }
 
 int main() {
-	MonsterChase* MC = new MonsterChase();
+	//_CrtSetBreakAlloc(212);
+	MonsterChase* MC =new MonsterChase();
 	while (MC->getGameStatus()) {
 		MC->update();
 	}
+	delete MC;
 	std::cout << "end of program" << std::endl;
+	_CrtDumpMemoryLeaks();
 }
