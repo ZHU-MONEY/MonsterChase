@@ -171,6 +171,7 @@ void MonsterChase::askForPlayerName()
 
 	std::cout << "player name is: *** " << playerName << " ***" << std::endl;
 	createPlayer(playerName);
+	//free(playerName);
 }
 
 void MonsterChase::createPlayer(char* name)
